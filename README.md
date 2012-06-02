@@ -1,0 +1,4 @@
+dotbash
+=======
+
+All my bashrc
