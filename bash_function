@@ -1,0 +1,15 @@
+
+aspectRatio ()
+{
+	for i in `seq 1 1000 `; do awk "BEGIN {print $1/$i, $2/$i}"; done |grep -v "\.";
+}
+
+psgrep ()
+{
+	ps -Af --headers | grep --color $1
+}
+
+cdl ()
+{
+	builtin cd $1 && ls
+}
