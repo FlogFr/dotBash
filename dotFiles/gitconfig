@@ -1,0 +1,27 @@
+[user]
+	email = florian.grignon@ovh.net
+	name = Florian Grignon
+[core]
+	excludesfile = /home/fgrignon/.gitignore_global
+	editor = vim
+	excludefiles = /home/fgrignon/.gitignore
+[merge]
+	tool = vimdiff
+[color]
+	ui = true
+	diff = always
+	interactive = always
+	branch = auto
+	grep = always
+	pager = true
+	showbranch = true
+	status = auto
+[alias]
+	lg = log -p
+	lgp = log --graph -p
+	addall = add -A
+	st = status
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[clean]
+	requiredForce = true

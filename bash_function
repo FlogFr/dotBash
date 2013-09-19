@@ -1,15 +1,161 @@
+#------------------------------------------
+# Go function go to specific path
+go ()
+{
+    if [[ -n "$1" ]];then
+        dirTo=`grep "^$1" ~/.gorc | cut -d ":" -f 2`
+        if [[ -n "$dirTo" ]];then
+            eval builtin cd ` echo -E "$dirTo" `
+        else
+            eval builtin cd "'"` echo -E "$1" `"'"
+        fi
+    else
+        eval builtin cd ~
+    fi
+    eval ls
+}
 
+#------------------------------------------
+# findname
+findname ()
+{
+    if [[ -n "$1" ]];then
+        find / -type f -name "*$1*" 2>&-
+    else
+        builtin echo "Cmd syntax : $0 <name_file_to_search>"
+    fi
+}
+
+# parse to get the current branch
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# mkdircd
+mkdircd ()
+{
+    if [[ -n "$1" ]];then
+        mkdir "$1"; builtin cd "!:1";
+    else
+        builtin echo "Cmd syntax: $0 <dir to create>"
+    fi
+}
+
+#------------------------------------------
+# reload bashrc
+reload_bashrc ()
+{
+    . ~/.bashrc
+}
+
+#------------------------------------------
+# aspectRatio: print all the aspect ratio
+# possible for the ration done
 aspectRatio ()
 {
-	for i in `seq 1 1000 `; do awk "BEGIN {print $1/$i, $2/$i}"; done |grep -v "\.";
+    if [[ -n "$1" ]]; then
+        for i in `seq 1 1000 `; do awk "BEGIN {print $1/$i, $2/$i}"; done |grep -v "\.";
+    else
+        echo "The syntax of the function is aspectRatio  width  height, or aspectRatio  height  width";
+    fi
 }
 
-psgrep ()
-{
-	ps -Af --headers | grep --color $1
-}
-
+#------------------------------------------
+# cdl: cd and ls
 cdl ()
 {
-	builtin cd $1 && ls
+	builtin cd $1 && ls -la
 }
+
+#------------------------------------------
+# edit the makefile if it exists
+makefile ()
+{
+    if [ -f ./Makefile ]; then
+        vim ./Makefile
+        return 0
+    fi
+    if [ -f ./MAKEFILE ]; then
+        vim ./MAKEFILE
+        return 0
+    fi
+    if [ -f ./makefile ]; then
+        vim ./makefile
+        return 0
+    fi
+    echo "[Error] No Makefile to edit"
+}
+
+#------------------------------------------
+# edit the readme if it exists
+readme ()
+{
+    if [ -f ./README ]; then
+        less ./README
+        return 0
+    fi
+    if [ -f ./readme ]; then
+        less ./readme
+        return 0
+    fi
+    if [ -f ./readme.txt ]; then
+        less ./readme.txt
+        return 0
+    fi
+    if [ -f ./readme.txt ]; then
+        less ./readme.txt
+        return 0
+    fi
+    echo "[Error] No readme file"
+}
+
+#------------------------------------------
+# psgrep: get a procsesus name
+psgrep ()
+{
+    if [[ -n "$1" ]]; then
+        ps fauxwww --headers | grep $1
+    else
+        echo "psgrep take one argument (the processus to search)";
+    fi
+}
+
+#------------------------------------------
+# makeloop: make in loop
+makeloop ()
+{
+    while true; do
+        make;
+        sleep 1;
+    done
+}
+
+#------------------------------------------
+# update_gits
+update_gits ()
+{
+    if [[ -n "$1" ]];then
+        builtin echo "Cmd syntax: $0 [no arguments]"
+    else
+        cd ~/.bash
+        git add -A
+        git commit -m "Update bash git"
+        git push
+        cd ~/.vim
+        git add -A
+        git commit -m "Update vim git"
+        git push
+    fi
+}
+
+#------------------------------------------
+# bash_colors
+bash_colors ()
+{
+    if [[ -n "$1" ]]; then
+        builtin echo "Cmd syntax: $0 [no arguments]"
+    else
+        printf "\e[%dm%d dark\e[0m \e[%d;1m%d bold\e[0m\n" {30..37}{,,,}
+    fi
+}
+

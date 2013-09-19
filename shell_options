@@ -1,0 +1,34 @@
+
+# -s set
+# -u unset
+
+# auto cd
+shopt -s autocd
+# cdspell
+shopt -s cdspell
+# checkjobs : before leaving
+shopt -s checkjobs
+# checkwinsize
+shopt -s checkwinsize
+# cmdhsit
+shopt -s cmdhist
+# dirspell
+shopt -s dirspell
+# dotglob
+shopt -s dotglob
+# expand aliases
+shopt -s expand_aliases
+# globstart
+shopt -s globstar
+# histappend
+shopt -s histappend
+# hostcomplete
+shopt -s hostcomplete
+# huponexit
+shopt -u huponexit
+# interactive_comments
+shopt -u interactive_comments
+# nocaseglob case insensitive expansion
+shopt -s nocaseglob
+# shift_verbose
+shopt -s shift_verbose

@@ -1,0 +1,39 @@
+urlCommand "chromium-browser '%s'"
+
+#unbind all the default key before binding
+#unbind modifiers-key context
+unbind right any
+unbind left any
+unbind j any
+unbind k any
+unbind l any
+unbind h any
+unbind g any
+unbind f any
+unbind alt-f any
+unbind mousePress4 any
+unbind mousePress5 any
+unbind mousePress6 any
+unbind mousePress7 any
+unbind [ any
+unbind ] any
+unbind 9 any
+
+#binding new keys
+#bind mod-keys context command
+bind j any scrollDown(200)
+bind k any scrollUp(200)
+bind u any prevPage
+bind d any nextPage
+bind l any scrollRight(200)
+bind h any scrollLeft(200)
+bind f any toggleFullScreenMode
+bind mousePress4 any scrollUp(100)
+bind mousePress5 any scrollDown(100)
+bind mousePress6 any scrollLeft(50)
+bind mousePress7 any scrollRight(50)
+bind [ any rotateCCW
+bind ] any rotateCW
+bind left any prevPage
+bind right any nextPage
+bind 9 any zoomFitPage

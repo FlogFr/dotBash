@@ -1,0 +1,26 @@
+#!/bin/bash +x
+
+RM_COLORS='\033[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+
+dirDotFiles='dotFiles'
+
+for file in `dir -1 $dirDotFiles`
+do
+    if [ -h "`eval echo $HOME/.$file`" ];then
+        rm "$HOME/.$file"
+    fi
+    ln -s $PWD/$dirDotFiles/$file $HOME/.$file
+done
+
+if [ ! -f "`eval echo $HOME/.gorc`" ];then
+    cp $PWD/resources/gorc $HOME/.gorc
+    echo -e "New gorc [${ORANGE}OK${RM_COLORS}]"
+fi
+
+echo "XTerm*activeIcon: true" >> ~/.Xresources
+echo "XTerm*iconPixmap: $HOME/.local/share/pixmaps/terminal.xbm" >> ~/.Xresources
+echo "XTerm*iconMask: $HOME/.local/share/pixmaps/terminal-mask.xbm" >> ~/.Xresources
+
+echo -e "Replace all the symlinks for config [${GREEN}OK${RM_COLORS}]"

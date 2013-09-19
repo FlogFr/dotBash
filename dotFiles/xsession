@@ -1,0 +1,10 @@
+#!/bin/sh 
+
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="$PATH:~/bin:"
+
+export MANSECT="2:1:3:7:8:9:3:4:5"
+export MPD_PORT="6601"
+
+exec awesome

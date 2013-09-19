@@ -1,0 +1,27 @@
+XTerm*background: black
+XTerm*foreground: white
+XTerm*title: [RkadeFR] Terminal
+XTerm*scrollbar: false
+
+XTerm*metaSendsEscape: true
+
+XTerm*faceName: Inconsolata
+XTerm*faceSize: 9
+XTerm*utf8: true
+XTerm*locale: true
+XTerm*utf8Title: true
+XTerm*xftAntiAlias: true
+
+XTerm*VT100.colorBDMode:     true
+XTerm*VT100.colorBD:         cyan
+XTerm*VT100.colorULMode:     true
+XTerm*VT100.colorUL:         magenta
+XTerm*VT100.veryBoldColors:  6
+XTerm*VT100.cutNewLine: false
+XTerm*VT100.cutToBeginningOfLine: false
+XTerm*VT100.charClass: 33:48,35:48,37:48,38:48,42:48,45-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+XTerm*activeIcon: true
+XTerm*iconPixmap: /home/grignonf/.local/share/pixmaps/terminal.xbm
+XTerm*iconMask: /home/grignonf/.local/share/pixmaps/terminal-mask.xbm
+

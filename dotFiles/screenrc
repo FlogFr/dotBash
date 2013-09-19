@@ -1,0 +1,28 @@
+startup_message off
+
+# change escape touch to Ctrl-w instead of Ctrl-a
+#escape ^Ww
+
+shelltitle Bash
+
+term xterm-256color
+
+defscrollback 50000
+
+vbell_msg "bell: window ~%"
+vbellwait 1
+vbell off
+
+
+bind l focus bottom
+bind j focus down
+bind k focus up
+bind h focus top
+
+bindkey "\101;\150" prev
+bindkey "\101;\154" next
+
+hardstatus on
+hardstatus alwayslastline "%{= bd}%-w%{= Wb}%n %t%{-}%+w %45=-- %t --%=%l %C%A - %D %d %M/%Y"
+
+msgwait 1
