@@ -5,8 +5,8 @@ XTerm*scrollbar: false
 
 XTerm*metaSendsEscape: true
 
-XTerm*faceName: Inconsolata
-XTerm*faceSize: 9
+XTerm*faceName: Droid Sans Mono
+XTerm*faceSize: 10
 XTerm*utf8: true
 XTerm*locale: true
 XTerm*utf8Title: true
