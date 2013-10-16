@@ -64,9 +64,9 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    if  s == 1      then tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 'www' }, s, layouts[1])
-    else            tags[s] = awful.tag({ 'jabber', 'email', 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-    end
+   if  s == 1      then tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 'www' }, s, layouts[1])
+   else            tags[s] = awful.tag({ 'jabber', 'email', 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+   end
 end
 awful.layout.set( awful.layout.suit.max, tags[1][9])
 awful.layout.set( awful.layout.suit.max, tags[2][2])
