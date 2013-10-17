@@ -209,3 +209,5 @@ EXEC 00;31
 .cpp 00;32
 .h 00;36
 .hpp 00;36
+*Makefile 00;36
+*makefile 00;36
