@@ -1,6 +1,3 @@
-#TERM for the color
-TERM=xterm-256color
-
 # ignoredups and ignorespace
 HISTCONTROL=ignoreboth
 
