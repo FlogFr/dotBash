@@ -10,17 +10,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-#set the path for bin
-PATH='~/bin/:/usr/games'
-# Qt 5
-if [ -d "${HOME}/Qt5.1.1" ]; then
-    PATH+=':~/Qt5.1.1/5.1.1/gcc_64/bin'
-fi
-if [ -f /home/fgrignon/odb_2.2.0/usr/bin/odb ]; then
-    PATH+=':/home/fgrignon/odb_2.2.0/usr/bin/'
-fi
-PATH+=':/usr/local/bin:/usr/bin:/bin:/usr/games'
-
 export LD_LIBRARY_PATH="$(eval echo ~/lib/)"
 
 
