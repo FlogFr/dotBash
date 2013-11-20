@@ -1,13 +1,14 @@
 # ignoredups and ignorespace
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
-MANWIDTH=100
+export MANWIDTH=100
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
-HISTFILESIZE=10000
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 
-GEM_PATH="~/gems"
+export GEM_PATH="~/gems"
+export TERM="xterm-256color"
 
 export LANG="en_US.utf8"
 export LANGUAGE="en_US.utf8"
