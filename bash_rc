@@ -51,13 +51,6 @@ if [ -f $(eval echo "~/.local_bash.sh") ]; then
     builtin echo "load local_bash.sh [OK]"
 fi
 
-# append to the history file, don't overwrite it
-export PROMPT_COMMAND='history -a'
-
-# for the long command line
-PS2='->'
-PS4=' +'
-
 # environment of bash
 export EDITOR=vim
 

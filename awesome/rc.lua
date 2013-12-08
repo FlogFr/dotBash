@@ -45,10 +45,10 @@ modkey = "Mod4"
 layouts =
 {
     awful.layout.suit.max,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.floating,
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
+    awful.layout.suit.floating,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.tile.top,
@@ -387,6 +387,8 @@ awful.rules.rules = {
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
+      properties = { floating = true } },
+    { rule = { class = "Skype" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     { rule = { class = browser, "Iceweasel", "chromium-browser" },
