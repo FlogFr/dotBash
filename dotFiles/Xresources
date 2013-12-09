@@ -6,7 +6,7 @@ XTerm*scrollbar: false
 XTerm*metaSendsEscape: true
 
 XTerm*faceName: Source Code Pro for Powerline
-XTerm*faceSize: 10
+XTerm*faceSize: 8
 XTerm*utf8: true
 XTerm*locale: true
 XTerm*utf8Title: true
