@@ -51,5 +51,7 @@ alias xpdf="xpdf -z 125 -cont -fullscreen "
 alias hibernate="sudo pm-hibernate"
 alias translate="translate 26ba0 "
 
+# all the edit
 alias editps1="vim ~/.bash/bash_ps1"
 alias editbinds="vim ~/.centerim5/binds.xml"
+alias editnote='editor ~/.notes'
