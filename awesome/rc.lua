@@ -12,6 +12,9 @@ require("vicious")
 -- Load Debian menu entries
 require("debian.menu")
 
+-- lfs for search the filesystem
+require("lfs")
+
 -- Get hostname
 local file = io.open('/proc/sys/kernel/hostname')
 local hostname = file:read("*all")
@@ -81,8 +84,17 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
+
+myawesomebin = { }
+for f in lfs.dir("/home/fgrignon/awesome-bin") do
+    if f ~= "." and f ~= ".." then
+        table.insert( myawesomebin, { f , f } )
+    end
+end
+
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
+                                    { "My Bins", myawesomebin },
                                     { "Open Terminal", terminal }
                                   }
                         })
