@@ -4,10 +4,9 @@ require("awful.autofocus")
 require("awful.rules")
 -- Theme handling library
 require("beautiful")
+
 -- Notification library
 require("naughty")
--- Vicious widget manager
-require("vicious")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -19,23 +18,43 @@ require("lfs")
 local file = io.open('/proc/sys/kernel/hostname')
 local hostname = file:read("*all")
 
--- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
-beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
-
 -- This is used later as the default terminal and editor to run.
-local terminal   = 'xterm'
-local browser    = ''
-local mailUA     = ''
-if ( string.sub(hostname, 0, string.len('rkade-thinkpad')) == 'rkade-thinkpad' ) then
-    browser     = "iceweasel"
-    mail      = "icedove"
-else
-    browser     = "firefox14"
-    mail      = "thunderbird13"
-end
+-- alternatives
+browser     = 'x-www-browser'
+email       = 'x-email-client'
+terminal    = 'x-terminal-emulator'
 editor      = os.getenv("EDITOR") or "editor"
 editor_cmd  = terminal .. " -e " .. editor
+
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+if awesome.startup_errors then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Oops, there were errors during startup!",
+                     text = awesome.startup_errors })
+end
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    awesome.add_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = err })
+        in_error = false
+    end)
+end
+-- }}}
+-- {{{ Variable definitions
+-- Themes define colours, icons, and wallpapers
+-- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
+
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -47,16 +66,16 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.max,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.floating,
-    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.floating,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
@@ -67,23 +86,18 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-   if  s == 1      then tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 'www' }, s, layouts[1])
-   else            tags[s] = awful.tag({ 'jabber', 'email', 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-   end
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
-awful.layout.set( awful.layout.suit.max, tags[1][9])
-awful.layout.set( awful.layout.suit.max, tags[2][2])
 -- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
+   { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
-
 
 myawesomebin = { }
 for f in lfs.dir("/home/fgrignon/awesome-bin") do
@@ -99,40 +113,8 @@ mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-
-
--- My functions
-function run_once(prg,arg_string,pname,screen)
-    if not prg then
-        do return nil end
-    end
-
-    if not pname then
-       pname = prg
-    end
-
-    if not arg_string then 
-        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")",screen)
-    else
-        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")",screen)
-    end
-end
-
-function runBrowser()
-    awful.tag.incncol(-1)
-    awful.tag.viewonly(tags[1][9])
-    run_once(browser, nil)
-end
-
-function runMail()
-    awful.tag.incncol( 1)
-    awful.tag.viewonly(tags[2][2])
-    run_once(mail, nil)
-end
-
-
--- mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
---                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
+                                     menu = mymainmenu })
 -- }}}
 
 -- {{{ Wibox
@@ -141,23 +123,6 @@ mytextclock = awful.widget.textclock({ align = "right" })
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
-
--- CPU usage widget
-cpuwidget = awful.widget.graph()
-cpuwidget:set_width(50)
-cpuwidget:set_height(30)
-cpuwidget:set_background_color("#494B4F")
-cpuwidget:set_color("#FF5656")
-cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
-
-cpuwidget_t = awful.tooltip({ objects = { cpuwidget.widget },})
-
--- Register CPU widget
-vicious.register(cpuwidget, vicious.widgets.cpu, 
-                    function (widget, args)
-                        cpuwidget_t:set_text("CPU Usage: " .. args[1] .. "%")
-                        return args[1]
-                    end)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -175,11 +140,17 @@ mytaglist.buttons = awful.util.table.join(
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
                      awful.button({ }, 1, function (c)
-                                              if not c:isvisible() then
-                                                  awful.tag.viewonly(c:tags()[1])
+                                              if c == client.focus then
+                                                  c.minimized = true
+                                              else
+                                                  if not c:isvisible() then
+                                                      awful.tag.viewonly(c:tags()[1])
+                                                  end
+                                                  -- This will also un-minimize
+                                                  -- the client, if needed
+                                                  client.focus = c
+                                                  c:raise()
                                               end
-                                              client.focus = c
-                                              c:raise()
                                           end),
                      awful.button({ }, 3, function ()
                                               if instance then
@@ -222,13 +193,13 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
+            mylauncher,
             mytaglist[s],
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
         mytextclock,
-        cpuwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -276,12 +247,23 @@ globalkeys = awful.util.table.join(
             end
         end),
 
+    -- Media
+    awful.key({ modkey,           }, "F1", function () awful.util.spawn("xscreensaver-command -lock") end), -- 
+
+    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 2dB-") end), --  
+    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 2dB+") end), -- 
+    awful.key({ }, "XF86AudioPlay",         function () awful.util.spawn("mpc toggle") end), -- 
+    awful.key({ }, "XF86AudioMute",         function () awful.util.spawn("amixer -q sset Master toggle") end), -- 
+    awful.key({ }, "XF86AudioNext",         function () awful.util.spawn("mpc next") end), -- 
+    awful.key({ }, "XF86AudioPrev",         function () awful.util.spawn("mpc prev") end), -- 
+    awful.key({ }, "XF86HomePage",          function () awful.util.spawn(browser) end), -- browser
+    awful.key({ }, "XF86Mail",              function () awful.util.spawn(email) end), -- email
+    awful.key({ }, "XF86Calculator",        function () awful.util.spawn("") end), -- calculator
+
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey,           }, "t", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey,           }, "b", function () runBrowser() end),
-    awful.key({ modkey,           }, "e", function () runMail() end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -292,26 +274,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    -- Media
-    awful.key({ modkey,           }, "F1", function () awful.util.spawn("xscreensaver-command -lock") end), -- 
-
-    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 2dB-") end), --  
-    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 2dB+") end), -- 
-    awful.key({ }, "XF86AudioPlay",         function () awful.util.spawn("mpc toggle") end), -- 
-    awful.key({ }, "XF86AudioMute",         function () awful.util.spawn("amixer -q sset Master toggle") end), -- 
-    awful.key({ }, "XF86AudioNext",         function () awful.util.spawn("mpc next") end), -- 
-    awful.key({ }, "XF86AudioPrev",         function () awful.util.spawn("mpc prev") end), -- 
-    awful.key({ }, "XF86HomePage",          function () runBrowser() end), -- browser
-    awful.key({ }, "XF86Mail",              function () runMail() end), -- email
-    awful.key({ }, "XF86Calculator",        function () awful.util.spawn("") end), -- calculator
-
-    awful.key({ modkey,           }, "F11", function () awful.util.spawn("setxkbmap fr") end), -- 
-    awful.key({ modkey,           }, "F12", function () awful.util.spawn("setxkbmap us") end), -- 
-
-    awful.key({ modkey },            "p",     function () awful.util.spawn_with_shell("firefox14 $( echo \"https://www.google.com/search?q=\"`xclip -o | tr ' ' '+'` )") end),
+    awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
@@ -323,13 +290,18 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey, "Shift"   }, "q",      function (c) c:kill()                         end),
+    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",      function (c) c.minimized = not c.minimized    end),
+    awful.key({ modkey,           }, "n",
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can't have the focus.
+            c.minimized = true
+        end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
@@ -373,12 +345,12 @@ for i = 1, keynumber do
                       if client.focus and tags[client.focus.screen][i] then
                           awful.client.toggletag(tags[client.focus.screen][i])
                       end
-                    end))
-    end
+                  end))
+end
 
-    clientbuttons = awful.util.table.join(
-        awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-        awful.button({ modkey }, 1, awful.mouse.client.move),
+clientbuttons = awful.util.table.join(
+    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
@@ -398,15 +370,13 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
     { rule = { class = "Skype" },
       properties = { floating = true } },
+    { rule = { class = "gimp" },
+      properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
-    { rule = { class = browser, "Iceweasel", "chromium-browser" },
-      properties = { tag = tags[1][9] } },
-    { rule = { class = mail, "Icedove", "Thunderbird" },
-      properties = { tag = tags[2][2] } },
+    -- { rule = { class = "Firefox" },
+    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
@@ -439,12 +409,4 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
-
-
-
--- {{{ Autostartup
--- commands
-awful.util.spawn_with_shell("xscreensaver -no-splash")
-awful.util.spawn_with_shell("~/bin/startup.sh")
 -- }}}

@@ -18,8 +18,11 @@ alias tln='tail -n 0 -f '
 alias python='python3 '
 alias pip='pip3'
 
+# quicker to edit something
+alias editps1='vim ~/.bash/bash_ps1'
+alias editbinds='vim ~/.centerim5/binds.xml'
 
-# all the edit
-alias editps1="vim ~/.bash/bash_ps1"
-alias editbinds="vim ~/.centerim5/binds.xml"
+# python quick edit
+alias shell_plus='./manage.py shell_plus'
+alias runserver='./manage.py runserver'
 alias editnote='editor ~/.notes'
