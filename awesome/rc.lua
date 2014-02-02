@@ -4,7 +4,6 @@ require("awful.autofocus")
 require("awful.rules")
 -- Theme handling library
 require("beautiful")
-
 -- Notification library
 require("naughty")
 
@@ -15,8 +14,9 @@ require("debian.menu")
 require("lfs")
 
 -- Get hostname
-local file = io.open('/proc/sys/kernel/hostname')
+local file     = io.open('/proc/sys/kernel/hostname')
 local hostname = file:read("*all")
+local home     = os.getenv('HOME')
 
 -- This is used later as the default terminal and editor to run.
 -- alternatives
@@ -50,11 +50,15 @@ do
     end)
 end
 -- }}}
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
--- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
 
+-- This is used later as the default terminal and editor to run.
+terminal = "x-terminal-emulator"
+editor = os.getenv("EDITOR") or "editor"
+editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -92,6 +96,13 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
+myawesomebin = { }
+for f in lfs.dir(home..'/awesome-bin') do
+    if f ~= "." and f ~= ".." then
+        table.insert( myawesomebin, { f , f } )
+    end
+end
+
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
@@ -99,17 +110,9 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-myawesomebin = { }
-for f in lfs.dir("/home/fgrignon/awesome-bin") do
-    if f ~= "." and f ~= ".." then
-        table.insert( myawesomebin, { f , f } )
-    end
-end
-
-mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "My Bins", myawesomebin },
-                                    { "Open Terminal", terminal }
+                                    { "open terminal", terminal }
                                   }
                         })
 
@@ -247,19 +250,6 @@ globalkeys = awful.util.table.join(
             end
         end),
 
-    -- Media
-    awful.key({ modkey,           }, "F1", function () awful.util.spawn("xscreensaver-command -lock") end), -- 
-
-    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 2dB-") end), --  
-    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 2dB+") end), -- 
-    awful.key({ }, "XF86AudioPlay",         function () awful.util.spawn("mpc toggle") end), -- 
-    awful.key({ }, "XF86AudioMute",         function () awful.util.spawn("amixer -q sset Master toggle") end), -- 
-    awful.key({ }, "XF86AudioNext",         function () awful.util.spawn("mpc next") end), -- 
-    awful.key({ }, "XF86AudioPrev",         function () awful.util.spawn("mpc prev") end), -- 
-    awful.key({ }, "XF86HomePage",          function () awful.util.spawn(browser) end), -- browser
-    awful.key({ }, "XF86Mail",              function () awful.util.spawn(email) end), -- email
-    awful.key({ }, "XF86Calculator",        function () awful.util.spawn("") end), -- calculator
-
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -275,6 +265,21 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
+
+     
+    -- Media
+    awful.key({ modkey,           }, "F1", function () awful.util.spawn("xscreensaver-command -lock") end), -- 
+
+    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 2dB-") end), --  
+    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 2dB+") end), -- 
+    awful.key({ }, "XF86AudioPlay",         function () awful.util.spawn("mpc toggle") end), -- 
+    awful.key({ }, "XF86AudioMute",         function () awful.util.spawn("amixer -q sset Master toggle") end), -- 
+    awful.key({ }, "XF86AudioNext",         function () awful.util.spawn("mpc next") end), -- 
+    awful.key({ }, "XF86AudioPrev",         function () awful.util.spawn("mpc prev") end), -- 
+    awful.key({ }, "XF86HomePage",          function () awful.util.spawn(browser) end), -- browser
+    awful.key({ }, "XF86Mail",              function () awful.util.spawn(email) end), -- email
+    awful.key({ }, "XF86Calculator",        function () awful.util.spawn("") end), -- calculator
+
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
@@ -370,9 +375,9 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "Skype" },
-      properties = { floating = true } },
     { rule = { class = "gimp" },
+      properties = { floating = true } },
+    { rule = { class = "Skype" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
