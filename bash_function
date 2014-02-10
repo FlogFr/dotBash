@@ -159,3 +159,12 @@ bash_colors ()
     fi
 }
 
+
+#------------------------------------------
+# import screenshot
+screenshot ()
+{
+    import ~/Pictures/Screenshot/current.png
+}
+
+
