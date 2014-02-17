@@ -11,6 +11,7 @@ XTerm*utf8: true
 XTerm*locale: true
 XTerm*utf8Title: true
 XTerm*xftAntiAlias: true
+xterm*cursorBlink: true
 
 XTerm*VT100.colorBDMode:     true
 XTerm*VT100.colorBD:         cyan
