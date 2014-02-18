@@ -16,39 +16,42 @@ export LD_LIBRARY_PATH="$(eval echo ~/lib/)"
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
+if [ -f ~/.bash/bash_function ]; then
+	. ~/.bash/bash_function
+    bash_log "OK" "load bash_function"
+else
+    echo "!problem while loading the bash_function!"
+    return
+fi
+
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
-    builtin echo "load bash_completion [OK]"
+    bash_log "OK" "load bash_completion"
 fi
 
 if [ -f ~/.bash/shell_options ]; then
 	. ~/.bash/shell_options
-    builtin echo "load shell_options [OK]"
+    bash_log "OK" "load shell_options"
 fi
 
 if [ -f ~/.bash/bash_variables ]; then
 	. ~/.bash/bash_variables
-    builtin echo "load bash_variables [OK]"
-fi
-
-if [ -f ~/.bash/bash_function ]; then
-	. ~/.bash/bash_function
-    builtin echo "load bash_function [OK]"
+    bash_log "OK" "load bash_variables"
 fi
 
 if [ -f ~/.bash/bash_aliases ]; then
     . ~/.bash/bash_aliases
-    builtin echo "load bash_aliases [OK]"
+    bash_log "OK" "load bash_aliases"
 fi
 
 if [ -f ~/.bash/bash_ps1 ]; then
     . ~/.bash/bash_ps1
-    builtin echo "load bash_ps1 [OK]"
+    bash_log "OK" "load bash_ps1"
 fi
 
 if [ -f $(eval echo "~/.local_bash.sh") ]; then
     . ~/.local_bash.sh
-    builtin echo "load local_bash.sh [OK]"
+    bash_log "OK" "load local_bash.sh"
 fi
 
 # environment of bash

@@ -1,6 +1,6 @@
 #!/bin/bash +x
 
-RM_COLORS='\033[0m'
+RM_COLORS='\036[0m'
 GREEN='\033[0;32m'
 ORANGE='\033[0;33m'
 

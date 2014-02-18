@@ -1,12 +1,24 @@
 
 
-function _update_ps1() {
-    export PS1="$(~/.powerline-shell.py $? 2> /dev/null)"
-}
+export PROMPT_COMMAND='history -a; export GIT_CURRENT_BRANCH=`get_current_git_branch`;'
 
-export PROMPT_COMMAND='history -a; _update_ps1'
+RM_COLORS='\033[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+RED='\033[0;31m'
+
+
+PS1="\A ${GREEN}"
+PS1+='`if [ "$?" == 0 ]; then echo -e "${GREEN}"; else echo -e "${RED}"; fi`'
+PS1+="[\j] \u@\h${RM_COLORS}:\w "
+# branch git 
+PS1+='`if [ -n $GIT_CURRENT_BRANCH ]; then echo "[${GIT_CURRENT_BRANCH}]"; fi`'
+PS1+="${RM_COLORS}\n $ "
+export PS1
 
 # for the long command line
 PS2='->'
 PS4=' +'
+
+bash_log "OK" "setting up all the prompts"
 
