@@ -12,7 +12,7 @@ PS1="\A ${GREEN}"
 PS1+='`if [ "$?" == 0 ]; then echo -e "${GREEN}"; else echo -e "${RED}"; fi`'
 PS1+="[\j] \u@\h${RM_COLORS}:\w "
 # branch git 
-PS1+='`if [ -n $GIT_CURRENT_BRANCH ]; then echo "[${GIT_CURRENT_BRANCH}]"; fi`'
+PS1+='`if [ -n $GIT_CURRENT_BRANCH ]; then echo "${GIT_CURRENT_BRANCH}"; fi`'
 PS1+="${RM_COLORS}\n $ "
 export PS1
 
