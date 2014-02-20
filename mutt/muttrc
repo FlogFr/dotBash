@@ -8,9 +8,11 @@ set shell          = "/bin/bash"
 hdr_order From: To: CC: BCC: Subject: Date: Organization: User-Agent: X-Mailer: Message-ID:
 
 set tmpdir         = "~/.mutt/tmp/"
-set sort           = threads
-set sort_aux       = date-sent
+set header_cache   = "~/.cache/mutt"
+set sort           = reverse-threads
 set strict_threads = "yes"
+
+set index_format   = "%4C %Z %[!%b %d %Y %I:%M:%S] %-17.17F (%3l) %s"
 
 set mbox           = +INBOX
 set record         = +SENT
@@ -19,6 +21,9 @@ set postponed      = +POSTPONED
 set attach_format  = "%u%D%I %t%4n %T%.40d%> [%.7m/%.10M, %.6e%?C?, %C?, %s] "
 set attach_sep     = "\n"
 set attach_split   = yes
+
+# bind
+bind index "^" imap-fetch-mail
 
 source "~/.local_muttrc"
 

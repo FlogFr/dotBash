@@ -1,4 +1,33 @@
 #------------------------------------------
+# bash_log 
+bash_log ()
+{
+    if [[ "$#" != 2 ]]; then
+        echo "we should have 2 argument to the bash_log function"
+    else
+        RM_COLOR='\033[0m'
+        case $1 in
+        "KO")
+            COLOR='\033[31m'
+            ;;
+        "WARN")
+            COLOR='\033[33m'
+            ;;
+        "OK")
+            COLOR='\033[32m'
+            ;;
+        *)
+            echo "this is not a normal log level"
+            return 1
+            ;;
+        esac
+
+        echo -e "$2 ${COLOR}[$1]${RM_COLORS}"
+        return 0
+    fi
+}
+
+#------------------------------------------
 # Go function go to specific path
 go ()
 {
@@ -156,35 +185,6 @@ get_current_git_branch ()
 }
 
 #------------------------------------------
-# bash_log 
-bash_log ()
-{
-    if [[ "$#" != 2 ]]; then
-        echo "we should have 2 argument to the bash_log function"
-    else
-        RM_COLOR='\033[0m'
-        case $1 in
-        "KO")
-            COLOR='\033[31m'
-            ;;
-        "WARN")
-            COLOR='\033[33m'
-            ;;
-        "OK")
-            COLOR='\033[32m'
-            ;;
-        *)
-            echo "this is not a normal log level"
-            return 1
-            ;;
-        esac
-
-        echo -e "$2 ${COLOR}[$1]${RM_COLORS}"
-        return 0
-    fi
-}
-
-#------------------------------------------
 # bash_colors
 bash_colors ()
 {
@@ -201,6 +201,20 @@ bash_colors ()
 screenshot ()
 {
     import ~/Pictures/Screenshot/current.png
+}
+
+
+#------------------------------------------
+# editrcfile
+editconfigurationfile ()
+{
+    if [[ $# != 1 ]]; then
+        bash_log "KO" "editrcfile takes only one argument"
+        return 1
+    fi
+
+    FILE="${HOME}/.$1rc"
+    vim ${FILE}
 }
 
 
