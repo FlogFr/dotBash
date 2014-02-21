@@ -26,4 +26,5 @@ set attach_split   = yes
 bind index "^" imap-fetch-mail
 
 source "~/.local_muttrc"
+source "~/.mutt/colors.zenburn"
 
