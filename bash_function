@@ -185,18 +185,6 @@ get_current_git_branch ()
 }
 
 #------------------------------------------
-# bash_colors
-bash_colors ()
-{
-    if [[ -n "$1" ]]; then
-        builtin echo "Cmd syntax: $0 [no arguments]"
-    else
-        printf "\e[%dm%d dark\e[0m \e[%d;1m%d bold\e[0m\n" {30..37}{,,,}
-    fi
-}
-
-
-#------------------------------------------
 # import screenshot
 screenshot ()
 {

@@ -27,6 +27,10 @@ alias editbinds='vim ~/.centerim5/binds.xml'
 alias shell_plus='./manage.py shell_plus'
 alias runserver='./manage.py runserver'
 
+alias bash_colors='printf "\e[%dm%d dark\e[0m \e[%d;1m%d bold\e[0m\n" {30..37}{,,,}'
+
+
+
 # others commands
 alias c='clear '
 alias cp='cp -av '
