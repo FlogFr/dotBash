@@ -25,6 +25,7 @@
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	last = log -1 HEAD
 	fe = fetch
+	co = checkout
 [clean]
 	requiredForce = true
 [push]
