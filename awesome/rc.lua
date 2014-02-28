@@ -1,11 +1,20 @@
+
+local home     = os.getenv('HOME')
+local hostname = os.getenv('HOSTNAME')
+
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
+
 -- Theme handling library
 require("beautiful")
 -- Notification library
 require("naughty")
+
+-- widgets
+require("vicious")
+require("wicked")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -13,10 +22,6 @@ require("debian.menu")
 -- lfs for search the filesystem
 require("lfs")
 
--- Get hostname
-local file     = io.open('/proc/sys/kernel/hostname')
-local hostname = file:read("*all")
-local home     = os.getenv('HOME')
 
 -- This is used later as the default terminal and editor to run.
 -- alternatives
@@ -60,6 +65,20 @@ terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
+-- }}}
+
+-- {{{ functions 
+-- {{{ setFg: put colored span tags around a text, useful for wiboxes
+function setFg(fg,s)
+    return "<span color=\"" .. fg .. "\">" .. s .."</span>"
+end
+local colored_on = setFg("green", "on")
+local colored_off = setFg("red", "off")
+-- }}}
+-- }}}
+
+
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -90,12 +109,16 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    if s == 1 then
+        tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    else
+        tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    end
 end
 -- }}}
 
 -- {{{ Menu
--- Create a laucher widget and a main menu
+-- Create a laucher in main menu
 myawesomebin = { }
 for f in lfs.dir(home..'/awesome-bin') do
     if f ~= "." and f ~= ".." then
@@ -110,9 +133,11 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = { 
+                                    { "MyBins", myawesomebin },
+                                    { "open terminal", terminal },
                                     { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
+                                    { "awesome", myawesomemenu, beautiful.awesome_icon }
                                   }
                         })
 
@@ -120,9 +145,64 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
 
+
+-- {{{ mpd related functions (status, get_song, command)
+function mpc_status()
+    local fh = io.popen("mpc status")
+    local lines = {}
+    local i = 1
+    for line in fh:lines() do
+        lines[i] = line
+        i = i + 1
+    end
+    io.close(fh)
+
+    if #lines >= 3 then
+        if string.find(lines[2], "^%[playing%]") then
+            return "playing"
+        elseif string.find(lines[2], "^%[paused%]") then
+            return "paused"
+        else
+            return "unknown"
+        end
+    elseif #lines == 1 then
+        return "stopped"
+    else
+        return "unknown"
+    end
+end
+
+function mpc_get_song()
+    return execute_command("mpc status --format '<b>%artist%</b> - <b>%title%</b> (from <b>%album%</b>)' | head -1")
+end
+-- }}}
+
+
 -- {{{ Wibox
+-- Initialize widget
+
+-- mpd widget
+-- {{{ MPD widget
+mpdwidget = widget({
+    type = 'textbox',
+    name = 'mpdwidget',
+    align = "right"
+})
+-- 
+wicked.register(mpdwidget, wicked.widgets.mpd, function (widget, args)
+    local state = mpc_status()
+    if state == "stopped" then
+        return "<b>[]</b> " .. setFg("#808080", "HALT! ")
+    elseif state == "paused" then
+        return "<b>||</b> " .. setFg("#808080", args[1]) .. " "
+    else
+        return setFg("white", "<b>&gt;</b> ") .. args[1] .. " "
+    end
+end)
+
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
+datewidget = widget({ type = "textbox" })
+vicious.register(datewidget, vicious.widgets.date, "%b %d, %R", 60)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -202,7 +282,9 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
-        mytextclock,
+--         mytextclock,
+        s == 1 and mpdwidget or nil,
+        s == 1 and datewidget or nil,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -415,3 +497,5 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+
