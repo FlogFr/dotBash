@@ -28,7 +28,7 @@ alias shell_plus='./manage.py shell_plus'
 alias runserver='./manage.py runserver'
 
 alias bash_colors='printf "\e[%dm%d dark\e[0m \e[%d;1m%d bold\e[0m\n" {30..37}{,,,}'
-
+alias screenshot='import ~/Pictures/Screenshot/current.png'
 
 
 # others commands

@@ -185,14 +185,6 @@ get_current_git_branch ()
 }
 
 #------------------------------------------
-# import screenshot
-screenshot ()
-{
-    import ~/Pictures/Screenshot/current.png
-}
-
-
-#------------------------------------------
 # editrcfile
 editconfigurationfile ()
 {

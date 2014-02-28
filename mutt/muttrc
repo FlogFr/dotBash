@@ -7,18 +7,23 @@ set editor         = "vim -c 'set textwidth=78'"
 set shell          = "/bin/bash"
 hdr_order From: To: CC: BCC: Subject: Date: Organization: User-Agent: X-Mailer: Message-ID:
 
-set edit_headers   = yes
+# header control
+unset header
+set edit_headers
+set autoedit
+set user_agent
+set weed
 
 set tmpdir         = "~/.mutt/tmp/"
 set header_cache   = "~/.cache/mutt"
 set sort           = reverse-threads
-set strict_threads = "yes"
+set strict_threads
 
 set index_format   = "%4C %Z %[!%b %d %Y %I:%M:%S] %-17.17F (%3l) %s"
 
 set attach_format  = "%u%D%I %t%4n %T%.40d%> [%.7m/%.10M, %.6e%?C?, %C?, %s] "
 set attach_sep     = "\n"
-set attach_split   = yes
+set attach_split
 
 set timeout        = 5
 set beep_new
