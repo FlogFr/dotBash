@@ -197,4 +197,15 @@ editconfigurationfile ()
     vim ${FILE}
 }
 
+#------------------------------------------
+# rm know host
+rmknownhost ()
+{
+    if [[ $# != 1 ]]; then
+        bash_log "KO" "rmknowhost takes only one parameter: line to delete"
+        return 1
+    fi
+
+    sed -i "${1}d" ~/.ssh/known_hosts
+}
 
