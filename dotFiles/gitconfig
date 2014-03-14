@@ -29,6 +29,7 @@
 	subst = submodule status --recursive
 	subup = submodule update --recursive
 	subsync = submodule sync
+	br = branch
 [clean]
 	requiredForce = true
 [push]
