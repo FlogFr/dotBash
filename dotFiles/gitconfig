@@ -26,6 +26,9 @@
 	last = log -1 HEAD
 	fe = fetch
 	co = checkout
+	subst = submodule status --recursive
+	subup = submodule update --recursive
+	subsync = submodule sync
 [clean]
 	requiredForce = true
 [push]
