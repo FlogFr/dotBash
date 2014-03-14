@@ -28,6 +28,10 @@ URxvt.scrollBar: false
 URxvt.background: [75]#000000
 URxvt.foreground: [100]#ffffff
 ! font
+URxvt.cursorBlink: xft:Source Code Pro for Powerline:size=8
+URxvt.font: xft:Source Code Pro for Powerline:size=8
+URxvt.charClass: 33:48,35:48,37:48,38:48,42:48,45-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+URxvt.veryBoldColors: 4
 
 ! terminal colors ------------------------------------------------------------
 ! Black (not tango) + DarkGrey
