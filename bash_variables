@@ -1,5 +1,5 @@
 #TERM for the color
-export TERM=rxvt-unicode
+# export TERM=rxvt-unicode
 
 # ignoredups and ignorespace
 export HISTCONTROL='ignoreboth:erasedups'
