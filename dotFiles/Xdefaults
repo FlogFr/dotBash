@@ -27,9 +27,10 @@ XTerm*VT100.charClass: 33:48,35:48,37:48,38:48,42:48,45-47:48,58-59:48,61:48,63-
 URxvt.scrollBar: false
 URxvt.background: [100]#000000
 URxvt.foreground: [100]#ffffff
+URxvt.termName: screen-256color
 ! font
 URxvt.cursorBlink: true
-URxvt.font: xft:Source Code Pro:style=regular:size=10
+URxvt.font: xft:Source Code Pro for Powerline:style=regular:size=8
 URxvt.charClass: 33:48,35:48,37:48,38:48,42:48,45-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 URxvt.veryBoldColors: 4
 URxvt.colorBDMode: true
