@@ -8,16 +8,15 @@ ORANGE='\033[0;33m'
 RED='\033[0;31m'
 
 
-PS1="\A ${GREEN}"
-PS1+='`if [ "$?" == 0 ]; then echo -e "${GREEN}"; else echo -e "${RED}"; fi`'
-PS1+="[\j] \u@\h${RM_COLORS} [\w] "
+PS1="${RM_COLORS}${GREEN}"
+PS1+="[\u@\h]${RM_COLORS} [\w] "
 # branch git 
 PS1+='`if [ -n $GIT_CURRENT_BRANCH ]; then echo "${GIT_CURRENT_BRANCH}"; fi`'
 PS1+="${RM_COLORS}\n $ "
 export PS1
 
 # for the long command line
-PS2='->'
+PS2='--<'
 PS4=' +'
 
 bash_log "OK" "setting up all the prompts"
