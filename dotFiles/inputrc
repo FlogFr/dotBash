@@ -1,5 +1,5 @@
 set editing-mode vi
 set keymap vi
 set completion-ignore-case on
-set print-completions-horizontally off
-set horizontal-scroll-mode on
+set print-completions-horizontally on
+set expand-tilde on
