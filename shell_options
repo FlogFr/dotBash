@@ -27,7 +27,9 @@ shopt -s hostcomplete
 # huponexit
 shopt -u huponexit
 # interactive_comments
-shopt -u interactive_comments
+shopt -s interactive_comments
+# mail warn
+shopt -s mailwarn
 # nocaseglob case insensitive expansion
 shopt -s nocaseglob
 # shift_verbose
