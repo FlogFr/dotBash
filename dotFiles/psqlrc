@@ -1,0 +1,8 @@
+\pset null - 
+\pset format wrapped
+\pset linestyle unicode
+\pset border 2
+\timing
+
+\set PROMPT1 '[%n@%M] [%/] < '
+
