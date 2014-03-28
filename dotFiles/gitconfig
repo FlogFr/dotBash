@@ -30,6 +30,7 @@
 	subup = submodule update --recursive
 	subsync = submodule sync
 	br = branch
+	re = rebase
 [clean]
 	requiredForce = true
 [push]
