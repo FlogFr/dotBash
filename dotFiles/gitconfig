@@ -31,6 +31,7 @@
 	subsync = submodule sync
 	br = branch
 	re = rebase
+	latest = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short) [%(committername)]'
 [clean]
 	requiredForce = true
 [push]
