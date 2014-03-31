@@ -27,7 +27,7 @@ XTerm*VT100.charClass: 33:48,35:48,37:48,38:48,42:48,45-47:48,58-59:48,61:48,63-
 URxvt.scrollBar: false
 URxvt.background: [100]#000000
 URxvt.foreground: [100]#ffffff
-URxvt.termName: rxvt-256color
+URxvt.termName: xterm-256color
 ! font
 URxvt.cursorBlink: true
 URxvt.font: xft:Inconsolata:style=regular:size=10
