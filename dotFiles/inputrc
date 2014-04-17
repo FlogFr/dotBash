@@ -7,3 +7,4 @@ set keymap vi-command
 set keymap vi-insert
 "\C-l": clear-screen
 "\C-w": backward-kill-word 
+"\C-x\C-r": re-read-init-file
