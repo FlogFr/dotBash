@@ -29,33 +29,33 @@ else
 fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-    bash_log "OK" "load bash_completion"
+	. /etc/bash_completion
+	bash_log "OK" "load bash_completion"
 fi
 
 if [ -f ~/.bash/shell_options ]; then
 	. ~/.bash/shell_options
-    bash_log "OK" "load shell_options"
+	bash_log "OK" "load shell_options"
 fi
 
 if [ -f ~/.bash/bash_variables ]; then
 	. ~/.bash/bash_variables
-    bash_log "OK" "load bash_variables"
+	bash_log "OK" "load bash_variables"
 fi
 
 if [ -f ~/.bash/bash_aliases ]; then
-    . ~/.bash/bash_aliases
-    bash_log "OK" "load bash_aliases"
-fi
-
-if [ -f ~/.bash/bash_ps1 ]; then
-    . ~/.bash/bash_ps1
-    bash_log "OK" "load bash_ps1"
+	. ~/.bash/bash_aliases
+	bash_log "OK" "load bash_aliases"
 fi
 
 if [ -f $(eval echo "~/.local_bash.sh") ]; then
-    . ~/.local_bash.sh
-    bash_log "OK" "load local_bash.sh"
+	. ~/.local_bash.sh
+	bash_log "OK" "load local_bash.sh"
+fi
+
+if [ -f ~/.bash/bash_ps1 ]; then
+	. ~/.bash/bash_ps1
+	bash_log "OK" "load bash_ps1"
 fi
 
 # environment of bash

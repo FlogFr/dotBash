@@ -22,7 +22,7 @@ bash_log ()
             ;;
         esac
 
-        echo -e "$2 ${COLOR}[$1]${RM_COLORS}"
+        echo -e "$2 ${COLOR}[$1]${RM_COLOR}"
         return 0
     fi
 }

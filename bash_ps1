@@ -1,6 +1,6 @@
 
 
-export PROMPT_COMMAND='history -a; export GIT_CURRENT_BRANCH=`get_current_git_branch`;'
+export PROMPT_COMMAND='history -a;'
 
 RM_COLORS='\033[0m'
 GREEN='\033[0;32m'
