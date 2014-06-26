@@ -17,6 +17,8 @@ set weed
 set tmpdir         = "~/.mutt/tmp/"
 set header_cache   = "~/.cache/mutt"
 set sort           = reverse-threads
+set message_cache_clean = yes
+set message_cachedir    = "~/.cache/mutt_messages/"
 set strict_threads
 
 set date_format = "%d/%m/%y %H:%S"

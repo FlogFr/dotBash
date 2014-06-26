@@ -56,8 +56,12 @@ findname ()
 }
 
 # parse to get the current branch
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+function git-branch-name {
+	git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3
+}
+function git-branch-prompt {
+	local branch=`git-branch-name`
+	if [ $branch ]; then printf " [%s]" $branch; fi
 }
 
 # mkdircd
@@ -157,31 +161,6 @@ makeloop ()
         make;
         sleep 1;
     done
-}
-
-#------------------------------------------
-# update_gits
-update_gits ()
-{
-    if [[ -n "$1" ]];then
-        builtin echo "Cmd syntax: $0 [no arguments]"
-    else
-        cd ~/.bash
-        git add -A
-        git commit -m "Update bash git"
-        git push
-        cd ~/.vim
-        git add -A
-        git commit -m "Update vim git"
-        git push
-    fi
-}
-
-#------------------------------------------
-# get current git branch
-get_current_git_branch ()
-{
-    ( git branch | grep '^*' | awk '{ print $2; }' ) 2>/dev/null
 }
 
 #------------------------------------------

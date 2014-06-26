@@ -9,9 +9,8 @@ RED='\033[0;31m'
 
 
 PS1="${RM_COLORS}${GREEN}"
-PS1+="[\u@\h]${RM_COLORS} [\w] "
+PS1+="[\u@\h]${RM_COLORS} [\w] \$(git-branch-prompt)"
 # branch git 
-PS1+='`if [ -n $GIT_CURRENT_BRANCH ]; then echo "${GIT_CURRENT_BRANCH}"; fi`'
 PS1+="${RM_COLORS}\n $ "
 export PS1
 
