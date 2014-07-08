@@ -1,3 +1,8 @@
+# environment of bash
+export EDITOR=vim
+export PAGER=less
+export LESS="-iMSx4 -FX"
+
 # ignoredups and ignorespace
 export HISTCONTROL='ignoreboth:erasedups'
 
