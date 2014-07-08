@@ -352,8 +352,8 @@ globalkeys = awful.util.table.join(
     -- Media
     awful.key({ modkey,           }, "F1", function () awful.util.spawn("xscreensaver-command -lock") end), -- 
 
-    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 2dB-") end), --  
-    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 2dB+") end), -- 
+    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 500-") end), --  
+    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 500+") end), -- 
     awful.key({ }, "XF86AudioPlay",         function () awful.util.spawn("mpc toggle") end), -- 
     awful.key({ }, "XF86AudioMute",         function () awful.util.spawn("amixer -q sset Master toggle") end), -- 
     awful.key({ }, "XF86AudioNext",         function () awful.util.spawn("mpc next") end), -- 
@@ -455,6 +455,8 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule = { class = "Keepassx" },
       properties = { floating = true } },
+    { rule = { class = "Vlc" },
+      properties = { floating = true } },
     { rule = { class = "Thunar" },
       properties = { floating = true } },
     { rule = { class = "MPlayer" },
@@ -465,6 +467,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Skype" },
       properties = { floating = true } },
+    { rule = { class = "Iceweasel" },
+      properties = { floating = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },

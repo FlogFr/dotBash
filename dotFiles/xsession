@@ -7,5 +7,5 @@ export PATH="${HOME}/bin:${HOME}/awesome-bin:$PATH"
 export MANSECT="2:1:3:7:8:9:3:4:5"
 export MPD_PORT="6601"
 
+exec xscreensaver -no-splash &
 exec awesome
-
