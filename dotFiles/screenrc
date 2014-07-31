@@ -26,3 +26,18 @@ hardstatus on
 hardstatus alwayslastline "%{= bd}%-w%{= Wb}%n %t%{-}%+w %45=-- %t --%=%l %C%A - %D %d %M/%Y"
 
 msgwait 1
+
+sessionname project
+screen -t MUTT 0 mutt
+chdir /home/grignonf/Projects
+screen -t VIM 1 vim
+chdir /home/grignonf/Projects/1avis
+setenv DEBUG '1'
+screen -t bash 2 
+at 2 stuff "source venv/bin/activate^M"
+screen -t bash 3
+screen -t bash 4
+chdir /home/grignonf
+screen -t bash 5
+next
+next

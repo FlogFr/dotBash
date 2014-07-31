@@ -61,3 +61,4 @@ alias editps1='vim ~/.bash/bash_ps1'
 alias editbinds='vim ~/.centerim5/binds.xml'
 alias editnote='editor ~/.notes'
 alias editfunctions='vim ~/.bash/bash_function'
+

@@ -176,6 +176,11 @@ function mpc_get_song()
     return execute_command("mpc status --format '<b>%artist%</b> - <b>%title%</b> (from <b>%album%</b>)' | head -1")
 end
 -- }}}
+-- {{{ acpi information
+function acpi_get_pourcentage()
+    return execute_command("acpi -b | cut -d',' -f 2")
+end
+-- }}}
 
 
 -- {{{ Wibox
@@ -189,6 +194,13 @@ mpdwidget = widget({
     align = "right"
 })
 -- 
+-- {{{ acpi widget
+acpiwidget = widget({
+    type = 'textbox',
+    name = 'acpiwidget',
+    align = "right"
+})
+-- 
 wicked.register(mpdwidget, wicked.widgets.mpd, function (widget, args)
     local state = mpc_status()
     if state == "stopped" then
@@ -199,6 +211,10 @@ wicked.register(mpdwidget, wicked.widgets.mpd, function (widget, args)
         return setFg("white", "<b>&gt;</b> ") .. args[1] .. " "
     end
 end)
+--wicked.register(acpiwidget, wicked.widgets.acpi, function (widget, args)
+    --local result = acpi_get_pourcentage()
+    --return result
+--end)
 
 -- Create a textclock widget
 datewidget = widget({ type = "textbox" })
@@ -453,9 +469,13 @@ awful.rules.rules = {
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
+    { rule = { class = "psi" },
+      properties = { floating = true } },
     { rule = { class = "Keepassx" },
       properties = { floating = true } },
     { rule = { class = "Vlc" },
+      properties = { floating = true } },
+    { rule = { class = "Zathura" },
       properties = { floating = true } },
     { rule = { class = "Thunar" },
       properties = { floating = true } },
@@ -466,6 +486,8 @@ awful.rules.rules = {
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { class = "Skype" },
+      properties = { floating = true } },
+    { rule = { class = "Wicd-client.py" },
       properties = { floating = true } },
     { rule = { class = "Iceweasel" },
       properties = { floating = false } },
@@ -506,4 +528,16 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+function run_once(prg,arg_string,screen)
+    if not prg then
+        do return nil end
+    end
+    if not arg_string then 
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x " .. prg .. " || (" .. prg .. ")",screen)
+    else
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x " .. prg .. " || (" .. prg .. " " .. arg_string .. ")",screen)
+    end
+end
 
+run_once("/home/grignonf/bin/CloudStation-Linux-Installer-3111/start-stop start",nil,1)
+run_once("/usr/bin/keepassx",nil,1)
