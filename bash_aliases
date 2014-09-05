@@ -15,10 +15,6 @@ alias psa='ps fauxwww'
 alias rm='rm -rv '
 alias tln='tail -n 0 -f '
 
-# pip and python alias for python3 !
-alias python='python3 '
-alias pip='pip3'
-
 # quicker to edit something
 alias editps1='vim ~/.bash/bash_ps1'
 alias editbinds='vim ~/.centerim5/binds.xml'

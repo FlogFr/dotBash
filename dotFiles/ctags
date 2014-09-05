@@ -1,2 +1,5 @@
 
 --exclude=.git
+--exclude=*/build/*
+--exclude=*js
+--python-kinds=-i

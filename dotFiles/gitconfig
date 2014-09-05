@@ -1,6 +1,6 @@
 [user]
-	email = florian.grignon@ovh.net
-	name = Florian Grignon
+	email = fgrignon@online.net
+	name = aRkadeFR
 [core]
 	excludesfile = /home/fgrignon/.gitignore_global
 	editor = vim
@@ -35,7 +35,8 @@
 	ds = diff --staged
 	amend = commit --amend -C HEAD
 	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short
+	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 [clean]
 	requiredForce = true
 [push]
-	default = matching
+	default = upstream
