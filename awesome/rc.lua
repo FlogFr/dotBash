@@ -541,3 +541,4 @@ end
 
 run_once("/home/grignonf/bin/CloudStation-Linux-Installer-3111/start-stop start",nil,1)
 run_once("/usr/bin/keepassx",nil,1)
+run_once("/usr/bin/psi",nil,1)
