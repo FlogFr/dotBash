@@ -42,6 +42,11 @@ URxvt.colorUL: 12
 URxvt.keysym.Home: \033[1~
 URxvt.keysym.End: \033[4~
 
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+
+
 ! terminal colors ------------------------------------------------------------
 ! Black (not tango) + DarkGrey
 *color0:  #000000

@@ -1,12 +1,3 @@
-[user]
-	email = fgrignon@online.net
-	name = aRkadeFR
-[core]
-	excludesfile = /home/fgrignon/.gitignore_global
-	editor = vim
-	excludefiles = /home/fgrignon/.gitignore
-[merge]
-	tool = vimdiff
 [color]
 	ui = true
 	diff = always
@@ -17,26 +8,22 @@
 	showbranch = true
 	status = auto
 [alias]
-	lg = log -p
+	lg = log
 	lgp = log --graph -p
-	addall = add -A
 	st = status
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	last = log -1 HEAD
 	fe = fetch
 	co = checkout
-	subst = submodule status --recursive
-	subup = submodule update --recursive
-	subsync = submodule sync
-	br = branch
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	re = rebase
-	latest = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short) [%(committername)]'
-	ds = diff --staged
-	amend = commit --amend -C HEAD
-	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short
+	br = branch
+	rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
 	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-[clean]
-	requiredForce = true
+	pushorigin = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\":aRkadeFR/\"$(git rev-parse --abbrev-ref HEAD)\""
+	deploypreprod = "!fab deploy:preprod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
+	deployprod = "!fab deploy:prod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
+    diffm = diff --diff-filter=M
 [push]
 	default = upstream
+[user]
+	email = contact@arkade.info
+	name = aRkadeFR
