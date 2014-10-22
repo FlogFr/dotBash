@@ -51,10 +51,13 @@ if [ -f $(eval echo "~/.local_bash.sh") ]; then
 	bash_log "OK" "load local_bash.sh"
 fi
 
-if [ -f ~/.bash/bash_ps1 ]; then
-	. ~/.bash/bash_ps1
-	bash_log "OK" "load bash_ps1"
-fi
+
+
+export PROMPT_COMMAND='history -a;'
+
+source /etc/bash_completion.d/git
+PS1="[\[\033[32m\]\w\[\033[0m\]] \$(__git_ps1)\n\[\033[0m\]\u$ \[\033[0m\]"
+bash_log "OK" "setting up all the prompts"
 
 # environment of bash
 export EDITOR=vim
