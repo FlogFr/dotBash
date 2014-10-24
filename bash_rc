@@ -60,7 +60,7 @@ if [ -f /etc/bash_completion.d/git ]; then
 else
     source /etc/bash_completion.d/git-prompt
 fi
-PS1="[\[\033[32m\]\w\[\033[0m\]] \$(__git_ps1)\n\[\033[0m\]\u$ \[\033[0m\]"
+PS1="[\[\033[32m\]\w\[\033[0m\]] \$(__git_ps1)\n\[\033[0m\]\u@\H$ \[\033[0m\]"
 bash_log "OK" "setting up all the prompts"
 
 # environment of bash
