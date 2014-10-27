@@ -489,6 +489,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Wicd-client.py" },
       properties = { floating = true } },
+    { rule = { class = "Popcorn-Time" },
+      properties = { floating = true } },
     { rule = { class = "Iceweasel" },
       properties = { floating = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
