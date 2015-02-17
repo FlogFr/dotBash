@@ -30,3 +30,8 @@ export LC_ADDRESS="en_US.utf8"
 export LC_TELEPHONE="en_US.utf8"
 export LC_MEASUREMENT="en_US.utf8"
 export LC_IDENTIFICATION="en_US.utf8"
+
+# python
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=~/venv
