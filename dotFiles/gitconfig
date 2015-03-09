@@ -1,30 +1,36 @@
 [color]
-	ui = true
-	diff = always
-	interactive = always
-	branch = auto
-	grep = always
-	pager = true
-	showbranch = true
-	status = auto
+        ui = true
+        diff = always
+        interactive = always
+        branch = auto
+        grep = always
+        pager = true
+        showbranch = true
+        status = auto
 [alias]
-	lg = log
-	lgp = log --graph -p
-	st = status
-	fe = fetch
-	co = checkout
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	re = rebase
-	br = branch
-	rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
-	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-	pushorigin = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\":aRkadeFR/\"$(git rev-parse --abbrev-ref HEAD)\""
-	pushmaster = "!git push origin \"$(git rev-parse --abbrev-ref HEAD)\":master"
-	deploypreprod = "!fab deploy:preprod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
-	deployprod = "!fab deploy:prod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
-    diffm = diff --diff-filter=M
+        lg = log
+        lgp = log --graph -p
+        st = status
+        fe = fetch
+        co = checkout
+        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+        re = rebase
+        br = branch
+        rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
+        delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+        pushorigin = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\":aRkadeFR/\"$(git rev-parse --abbrev-ref HEAD)\""
+        pushmaster = "!git push origin \"$(git rev-parse --abbrev-ref HEAD)\":master"
+        deploypreprod = "!fab deploy:preprod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
+        deployprod = "!fab deploy:prod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
+        diffm = diff --diff-filter=M
+        diffc = diff --cached
 [push]
-	default = upstream
+        default = upstream
 [user]
-	email = contact@arkade.info
-	name = aRkadeFR
+        email = contact@arkade.info
+        name = aRkadeFR
+[merge]
+        tool = vimdiff
+[mergetool]
+        prompt = false
+
