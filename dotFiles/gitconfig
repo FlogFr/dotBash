@@ -19,6 +19,7 @@
 	rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
 	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	pushorigin = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\":aRkadeFR/\"$(git rev-parse --abbrev-ref HEAD)\""
+	pushmaster = "!git push origin \"$(git rev-parse --abbrev-ref HEAD)\":master"
 	deploypreprod = "!fab deploy:preprod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
 	deployprod = "!fab deploy:prod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
     diffm = diff --diff-filter=M
