@@ -35,3 +35,6 @@ export LC_IDENTIFICATION="en_US.utf8"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/venv
+
+# npm
+export PATH="${PATH}:${HOME}/npm/bin"
