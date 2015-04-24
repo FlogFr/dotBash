@@ -541,6 +541,7 @@ function run_once(prg,arg_string,screen)
     end
 end
 
+run_once("/usr/bin/ssh-agent > ~/ssh-agent.sh",nil,1)
 run_once("/home/grignonf/bin/CloudStation-Linux-Installer-3111/start-stop start",nil,1)
 run_once("/usr/bin/keepassx",nil,1)
 run_once("/usr/bin/psi",nil,1)
