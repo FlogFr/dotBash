@@ -368,8 +368,8 @@ globalkeys = awful.util.table.join(
     -- Media
     awful.key({ modkey,           }, "F1", function () awful.util.spawn("xscreensaver-command -lock") end), -- 
 
-    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -q sset Master 2-db") end), --  
-    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -q sset Master 2+db") end), -- 
+    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn("amixer -c 1 -q sset Master 2-db") end), --  
+    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn("amixer -c 1 -q sset Master 2+db") end), -- 
     awful.key({ }, "XF86AudioPlay",         function () awful.util.spawn("mpc toggle") end), -- 
     awful.key({ }, "XF86AudioMute",         function () awful.util.spawn("amixer -q sset Master toggle") end), -- 
     awful.key({ }, "XF86AudioNext",         function () awful.util.spawn("mpc next") end), -- 
@@ -481,9 +481,11 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
+    { rule = { class = "Steam" },
+      properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "gimp" },
+    { rule = { class = "Gimp" },
       properties = { floating = true } },
     { rule = { class = "Skype" },
       properties = { floating = true } },
@@ -542,6 +544,7 @@ function run_once(prg,arg_string,screen)
 end
 
 run_once("/usr/bin/ssh-agent > ~/ssh-agent.sh",nil,1)
-run_once("/home/grignonf/bin/CloudStation-Linux-Installer-3111/start-stop start",nil,1)
+run_once("/home/arkadefr/bin/CloudStation-Linux-Installer-3111/start-stop start",nil,1)
 run_once("/usr/bin/keepassx",nil,1)
+run_once("/usr/bin/icedove",nil,1)
 run_once("/usr/bin/psi",nil,1)
