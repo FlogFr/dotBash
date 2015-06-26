@@ -22,7 +22,6 @@ require("debian.menu")
 -- lfs for search the filesystem
 require("lfs")
 
-
 -- This is used later as the default terminal and editor to run.
 -- alternatives
 browser     = 'x-www-browser'
@@ -145,37 +144,6 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
 
-
--- {{{ mpd related functions (status, get_song, command)
-function mpc_status()
-    local fh = io.popen("mpc status")
-    local lines = {}
-    local i = 1
-    for line in fh:lines() do
-        lines[i] = line
-        i = i + 1
-    end
-    io.close(fh)
-
-    if #lines >= 3 then
-        if string.find(lines[2], "^%[playing%]") then
-            return "playing"
-        elseif string.find(lines[2], "^%[paused%]") then
-            return "paused"
-        else
-            return "unknown"
-        end
-    elseif #lines == 1 then
-        return "stopped"
-    else
-        return "unknown"
-    end
-end
-
-function mpc_get_song()
-    return execute_command("mpc status --format '<b>%artist%</b> - <b>%title%</b> (from <b>%album%</b>)' | head -1")
-end
--- }}}
 -- {{{ acpi information
 function acpi_get_pourcentage()
     return execute_command("acpi -b | cut -d',' -f 2")
@@ -200,21 +168,6 @@ acpiwidget = widget({
     name = 'acpiwidget',
     align = "right"
 })
--- 
-wicked.register(mpdwidget, wicked.widgets.mpd, function (widget, args)
-    local state = mpc_status()
-    if state == "stopped" then
-        return "<b>[]</b> " .. setFg("#808080", "HALT! ")
-    elseif state == "paused" then
-        return "<b>||</b> " .. setFg("#808080", args[1]) .. " "
-    else
-        return setFg("white", "<b>&gt;</b> ") .. args[1] .. " "
-    end
-end)
---wicked.register(acpiwidget, wicked.widgets.acpi, function (widget, args)
-    --local result = acpi_get_pourcentage()
-    --return result
---end)
 
 -- Create a textclock widget
 datewidget = widget({ type = "textbox" })
@@ -544,7 +497,7 @@ function run_once(prg,arg_string,screen)
 end
 
 run_once("/usr/bin/ssh-agent > ~/ssh-agent.sh",nil,1)
-run_once("/home/arkadefr/bin/CloudStation-Linux-Installer-3111/start-stop start",nil,1)
+run_once("/usr/bin/synology-cloud-station",nil,1)
 run_once("/usr/bin/keepassx",nil,1)
 run_once("/usr/bin/icedove",nil,1)
 run_once("/usr/bin/psi",nil,1)

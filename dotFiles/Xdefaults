@@ -48,28 +48,27 @@ URxvt.matcher.button: 1
 
 
 ! terminal colors ------------------------------------------------------------
-! coming from https://github.com/chriskempson/base16-shell
 ! Black (not tango) + DarkGrey
 *color0:  #000000
-*color8:  #585858
+*color8:  #555753
 ! DarkRed + Red
-*color1:  #ab4642
-*color9:  #ab4642
+*color1:  #af0000
+*color9:  #d70000
 ! DarkGreen + Green
-*color2:  #a1b56c
-*color10: #a1b56c
+*color2:  #93d44f
+*color10: #c8e7a8
 ! DarkYellow + Yellow
-*color3:  #f7ca88
-*color11: #f7ca88
+*color3:  #eab93d
+*color11: #ffc123
 ! DarkBlue + Blue
-*color4:  #7cafc2
-*color12: #7cafc2
+*color4:  #005fd7
+*color12: #0087ff
 ! DarkMagenta + Magenta
-*color5:  #ba8baf
-*color13: #ba8baf
+*color5:  #800080
+*color13: #ff00ff
 !DarkCyan + Cyan (both not tango)
-*color6:  #86c1b9
-*color14: #86c1b9
+*color6:  #89b6e2
+*color14: #46a4ff
 ! LightGrey + White
-*color7:  #d8d8d8
-*color15: #f8f8f8
+*color7:  #cccccc
+*color15: #ffffff
