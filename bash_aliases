@@ -20,8 +20,8 @@ alias editps1='vim ~/.bash/bash_ps1'
 alias editbinds='vim ~/.centerim5/binds.xml'
 
 # python quick edit
-alias shell_plus='./manage.py shell_plus'
-alias runserver='./manage.py runserver'
+alias shell_plus='django-admin shell_plus'
+alias runserver='django-admin runserver localhost:8000'
 
 alias bash_colors='printf "\e[%dm%d dark\e[0m \e[%d;1m%d bold\e[0m\n" {30..37}{,,,}'
 alias screenshot='import ~/Pictures/Screenshot/current.png'
