@@ -8,5 +8,6 @@ export MPD_PORT="6601"
 
 xrandr --output DVI-I-3 --right-of DVI-I-0
 
+exec redshift -l 48.8:2.3 &
 exec xscreensaver -no-splash &
 exec awesome
