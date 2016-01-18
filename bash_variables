@@ -6,7 +6,7 @@ export LESS="-r"
 # ignoredups and ignorespace
 export HISTCONTROL='ignoreboth:erasedups'
 
-export MANWIDTH=100
+export MANWIDTH=80
 
 export EDITOR='vim'
 
@@ -32,9 +32,9 @@ export LC_MEASUREMENT="en_US.utf8"
 export LC_IDENTIFICATION="en_US.utf8"
 
 # python
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 source /usr/local/bin/virtualenvwrapper.sh
-export WORKON_HOME=~/venv
+export WORKON_HOME=~/.virtualenvs
 
 # npm
 export PATH="${PATH}:${HOME}/npm/bin"
