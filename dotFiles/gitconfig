@@ -18,17 +18,10 @@
         br = branch
         rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
         delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-        sentrybranch = "!f() { git co -b HotFix/S$1 origin/staging; }; f"
-        redminebranch = "!f() { git co -b r$1/$2 origin/staging; }; f"
-        pushorigin = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\":aRkadeFR/\"$(git rev-parse --abbrev-ref HEAD)\""
-        pushstaging = "!git push origin \"$(git rev-parse --abbrev-ref HEAD)\":staging"
-        pushmaster = "!git push origin \"$(git rev-parse --abbrev-ref HEAD)\":master"
-        deploypreprod = "!fab deploy:preprod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
-        deployprod = "!fab deploy:prod,\"$(git rev-parse --abbrev-ref --symbolic-full-name @{u})\""
         diffm = diff --diff-filter=M
         diffc = diff --cached
 [push]
-        default = upstream
+	default = current
 [user]
         email = contact@arkade.info
         name = aRkadeFR
