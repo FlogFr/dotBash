@@ -33,7 +33,7 @@ export LC_IDENTIFICATION="en_US.utf8"
 
 # python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/.virtualenvs
 
 # npm
