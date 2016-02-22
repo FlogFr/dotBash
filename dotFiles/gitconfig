@@ -1,34 +1,38 @@
 [color]
-        ui = true
-        diff = always
-        interactive = always
-        branch = auto
-        grep = always
-        pager = true
-        showbranch = true
-        status = auto
+	ui = true
+	diff = always
+	interactive = always
+	branch = auto
+	grep = always
+	pager = true
+	showbranch = true
+	status = auto
 [alias]
-        lg = log
-        lgp = log --graph -p
-        st = status
-        fe = fetch
-        co = checkout
-        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-        re = rebase
-        br = branch
-        rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
-        delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-        diffm = diff --diff-filter=M
-        diffc = diff --cached
+	lg = log
+	lgp = log --graph -p
+	st = status
+	fe = fetch
+	co = checkout
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	re = rebase
+	br = branch
+	rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
+	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	diffs = diff --staged
+	diffc = diff --cached
+	diffm = diff origin/master..HEAD
+	ctags = !.git/hooks/ctags
 [push]
 	default = current
 [user]
-        email = contact@arkade.info
-        name = aRkadeFR
+	email = contact@arkade.info
+	name = aRkadeFR
 [merge]
-        tool = vimdiff
+	tool = vimdiff
 [mergetool]
-        prompt = false
+	prompt = false
 
 [github]
 	user = aRkadeFR
+[init]
+	templatedir = ~/.git_template
