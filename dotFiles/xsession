@@ -12,4 +12,5 @@ exec xset r rate 200 60 &
 exec redshift -l 48.8:2.3 &
 exec xscreensaver -no-splash &
 exec ssh-agent > /home/arkadefr/ssh-agent.sh &
+exec synology-cloud-station &
 exec awesome
