@@ -18,6 +18,7 @@
 	br = branch
 	rmbr = "branch --merged \\| grep -v \"\\*\" \\| xargs -n 1 git branch -d "
 	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	subupgrade = "!git submodule foreach git pull origin master"
 	diffs = diff --staged
 	diffc = diff --cached
 	diffm = diff origin/master..HEAD
