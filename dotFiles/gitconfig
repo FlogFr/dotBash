@@ -23,6 +23,8 @@
 	diffc = diff --cached
 	diffm = diff origin/master..HEAD
 	ctags = !.git/hooks/ctags
+	enablehooks = "!chmod u+x .git/hooks/*"
+	disablehooks = "!chmod u-x .git/hooks/*"
 [push]
 	default = current
 [user]
