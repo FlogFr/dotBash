@@ -23,6 +23,7 @@
 	diffc = diff --cached
 	diffm = diff origin/master..HEAD
 	ctags = !.git/hooks/ctags
+	updatehooks = "!cp -fr ~/.git_template/hooks/* .git/hooks/"
 	enablehooks = "!chmod u+x .git/hooks/*"
 	disablehooks = "!chmod u-x .git/hooks/*"
 [push]
