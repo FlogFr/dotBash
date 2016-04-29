@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+PATH_FILE=$1
+COMMIT_TYPE=$2
+# if amended
+COMMIT_SHA1=$3
+
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+if [[ $BRANCH_NAME =~ ^[0-9]+-.* ]];then
+	GITHUB_ISSUE="${BRANCH_NAME%%-*}"
+	sed -i.bak -e "1s/^/Cf #${GITHUB_ISSUE} - /" $1
+else
+	echo "This branch is not related to github issue, will not prepare the commit-msg"
+fi
