@@ -54,13 +54,6 @@ if [ -f $(eval echo "~/.local_bash.sh") ]; then
 	bash_log "OK" "load local_bash.sh"
 fi
 
-if pgrep ssh-agent 1>/dev/null 2>&1; then
-	. ~/ssh-agent.sh
-	bash_log "OK" "loaded the ssh-agent into environment"
-else
-	bash_log "KO" "pouet"
-fi
-
 export PROMPT_COMMAND='history -a;'
 
 if [ -f /etc/bash_completion.d/git ]; then
