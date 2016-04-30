@@ -31,6 +31,7 @@
 [user]
 	email = contact@arkade.info
 	name = aRkadeFR
+	signingkey = 65B1B172
 [merge]
 	tool = vimdiff
 [mergetool]
