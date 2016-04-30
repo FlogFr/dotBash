@@ -10,6 +10,8 @@ export MANWIDTH=80
 
 export EDITOR='vim'
 
+export SSH_AUTH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=10000
 export HISTFILESIZE=10000
