@@ -11,6 +11,6 @@ xrandr --output DVI-I-3 --right-of DVI-I-0
 exec xset r rate 200 60 &
 exec redshift -l 48.8:2.3 &
 exec xscreensaver -no-splash &
-exec ssh-agent > /home/arkadefr/ssh-agent.sh &
+exec gpg-agent --homedir /home/arkadefr/.gnupg --use-standard-socket --daemon &
 exec synology-cloud-station &
 exec awesome
