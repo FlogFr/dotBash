@@ -5,7 +5,7 @@ IgnoreOnIsolate=true
 [Service]
 EnvironmentFile=/home/arkadefr/.config/env
 Type=forking
-ExecStart=/usr/bin/gpg-agent --daemon --keep-display --display :0 --pinentry-program /usr/bin/pinentry-gnome3
+ExecStart=/usr/bin/gpg-agent --daemon --use-standard-socket --keep-display --display :0 --pinentry-program /usr/bin/pinentry-gnome3
 Restart=on-abort
 
 [Install]
