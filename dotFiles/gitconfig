@@ -26,6 +26,7 @@
 	updatehooks = "!cp -fr ~/.git_template/hooks/* .git/hooks/"
 	enablehooks = "!chmod u+x .git/hooks/*"
 	disablehooks = "!chmod u-x .git/hooks/*"
+	clearorig = "!find . -name '*orig' -exec rm  {} \\;"
 [push]
 	default = current
 [user]
