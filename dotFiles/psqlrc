@@ -4,7 +4,7 @@
 \pset linestyle unicode
 \pset border 2
 
-- Customize prompts
+-- Customize prompts
 \set PROMPT1 '[%n@%M] [%/] < '
 \set PROMPT2 '... # '
 
