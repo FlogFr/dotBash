@@ -188,3 +188,10 @@ rmknownhost ()
     sed -i "${1}d" ~/.ssh/known_hosts
 }
 
+
+#------------------------------------------
+# create_password
+create_password ()
+{
+    date +%s | sha256sum | base64 | head -c 32 ; echo
+}
