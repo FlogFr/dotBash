@@ -11,5 +11,5 @@ else
 	touch "$GIT_DIR/lock.tags"
 fi
 trap 'rm -f "$GIT_DIR/lock.tags"; rm -f "$GIT_DIR/$$.tags"' EXIT
-git ls-files | grep -v 'txt"$' | ctags -L - -f"$GIT_DIR/$$.tags" --languages=Python,SQL,-Javascript,-HTML
+git ls-files | grep -v '\(txt\|pdf\)"$' | ctags -L - -f"$GIT_DIR/$$.tags" --languages=Python,SQL,-Javascript,-HTML
 mv "$GIT_DIR/$$.tags" ".ctags"

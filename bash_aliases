@@ -51,6 +51,7 @@ alias ps='ps fauxwww'
 alias rm='rm -rvf '
 alias hibernate='sudo pm-hibernate'
 alias translate='translate 26ba0 '
+alias tmux='tmux -2'
 
 # all the edit
 alias editps1='vim ~/.bash/bash_ps1'

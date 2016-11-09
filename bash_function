@@ -195,3 +195,11 @@ create_password ()
 {
     date +%s | sha256sum | base64 | head -c 32 ; echo
 }
+
+
+#------------------------------------------
+# version (get version package)
+version ()
+{
+    dpkg -l | grep $1
+}
