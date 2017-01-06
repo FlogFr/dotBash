@@ -190,8 +190,8 @@ rmknownhost ()
 
 
 #------------------------------------------
-# create_password
-create_password ()
+# generate_password
+generate_password ()
 {
     date +%s | sha256sum | base64 | head -c 32 ; echo
 }
@@ -202,4 +202,24 @@ create_password ()
 version ()
 {
     dpkg -l | grep $1
+}
+
+
+#------------------------------------------
+# parse and output error line for vim
+# example:
+# input: tests/repository/test_memrepo.py:50:
+# output: +50 tests/repository/test_memrepo.py
+vim_parse_error_line ()
+{
+    file=$(echo $1 | cut -d: -f1)
+    line=$(echo $1 | cut -d: -f2)
+    echo "+$line $file"
+}
+
+vim_error ()
+{
+    vim_file_line=$(vim_parse_error_line $1)
+    IFS=' ' read -r -a arguments <<< "$vim_file_line"
+    vim ${arguments[0]} ${arguments[1]}
 }

@@ -23,7 +23,11 @@ export GEM_PATH="~/gems"
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 # source /usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/.virtualenvs
+export PYTHONDONTWRITEBYTECODE=y
 
 # npm
 export PATH="${PATH}:${HOME}/npm/bin"
 export NPM_PACKAGES="${HOME}/.npm-packages"
+
+# peopleask
+export PEOPLEASK_ANSIBLE_LOG_DIR="/var/log/deployment"
