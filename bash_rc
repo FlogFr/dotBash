@@ -1,9 +1,9 @@
 # memo for the diff files
 # exe /etc/profile
-# if ~/.bash_profile exists
-#   exe ~/.bash_profile
+# if #PWD#_profile exists
+#   exe #PWD#_profile
 # else
-#   if ~/.bash_login
+#   if #PWD#_login
 #   else
 #       if ~/.profile
 
@@ -20,8 +20,8 @@ mesg n
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f ~/.bash/bash_function ]; then
-	. ~/.bash/bash_function
+if [ -f #PWD#/bash_function ]; then
+	. #PWD#/bash_function
     bash_log "OK" "load bash_function"
 else
     echo "!problem while loading the bash_function!"
@@ -30,22 +30,21 @@ fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 	. /etc/bash_completion
-	. ~/.bash/django_bash_completion
 	bash_log "OK" "load bash_completion"
 fi
 
-if [ -f ~/.bash/shell_options ]; then
-	. ~/.bash/shell_options
+if [ -f #PWD#/shell_options ]; then
+	. #PWD#/shell_options
 	bash_log "OK" "load shell_options"
 fi
 
-if [ -f ~/.bash/bash_variables ]; then
-	. ~/.bash/bash_variables
+if [ -f #PWD#/bash_variables ]; then
+	. #PWD#/bash_variables
 	bash_log "OK" "load bash_variables"
 fi
 
-if [ -f ~/.bash/bash_aliases ]; then
-	. ~/.bash/bash_aliases
+if [ -f #PWD#/bash_aliases ]; then
+	. #PWD#/bash_aliases
 	bash_log "OK" "load bash_aliases"
 fi
 

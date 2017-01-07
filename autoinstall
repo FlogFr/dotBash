@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -eu
+
+echo "Installing the bash.rc"
+
+cp -fr "${PWD}/bash_rc" ~/.bashrc
+sed -i "s~#PWD#~${PWD}~g" ~/.bashrc
