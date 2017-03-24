@@ -223,3 +223,9 @@ vim_error ()
     IFS=' ' read -r -a arguments <<< "$vim_file_line"
     vim ${arguments[0]} ${arguments[1]}
 }
+
+#------------------------------------------
+# Change the window name
+wname() {
+        echo -en "\033]0;$@\007";
+}
