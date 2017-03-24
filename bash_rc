@@ -53,7 +53,7 @@ if [ -f $(eval echo "~/.local_bash.sh") ]; then
 	bash_log "OK" "load local_bash.sh"
 fi
 
-export PROMPT_COMMAND='history -a; history -c; history -r;'
+export PROMPT_COMMAND='history -a; history -c; history -r; echo -en "\033]0;$PWD\007"'
 
 if [ -f /etc/bash_completion.d/git ]; then
     source /etc/bash_completion.d/git
