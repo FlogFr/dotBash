@@ -31,3 +31,5 @@ export NPM_PACKAGES="${HOME}/.npm-packages"
 
 # peopleask
 export PEOPLEASK_ANSIBLE_LOG_DIR="/var/log/deployment"
+
+export LIBVIRT_DEFAULT_URI="qemu:///system"

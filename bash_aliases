@@ -10,7 +10,7 @@ alias cp='cp -av '
 
 # others commands
 
-alias o='mimeopen '
+alias o='xdg-open '
 alias psa='ps fauxwww'
 alias rm='rm -rv '
 alias tln='tail -n 0 -f '
