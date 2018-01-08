@@ -9,7 +9,6 @@ alias ..='builtin cd .. && pwd && ls -la'
 alias cp='cp -av '
 
 # others commands
-
 alias o='xdg-open '
 alias psa='ps fauxwww'
 alias rm='rm -rv '
@@ -43,7 +42,6 @@ alias ghelp='git help'
 alias j='jobs '
 alias less='less -R'
 alias mv='mv -v '
-alias o='mimeopen '
 alias py='python '
 alias pu='pushd '
 alias po='popd '
